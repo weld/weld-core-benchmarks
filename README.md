@@ -21,3 +21,10 @@ To specify a custom directory use `-o`:
 ```
 $ ./run-benchmarks -o /home/foo/bar
 ```
+
+By default, `mvn` command is used to build the benchmarks shaded jar.
+To specify a custom command use `-m`:
+
+```
+$ ./run-benchmarks -m "/opt/maven/bin/mvn"
+```
