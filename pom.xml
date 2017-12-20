@@ -1,0 +1,221 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.jboss.weld.benchmark</groupId>
+  <artifactId>weld-core-benchmarks</artifactId>
+  <version>0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>Weld: Microbenchmarks</name>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <shaded.jar.name>weld-core-benchmarks</shaded.jar.name>
+    <!-- Versions -->
+    <version.jmh>1.19</version.jmh>
+    <version.weld>2.4.6.Final</version.weld>
+    <version.xchart>3.5.0</version.xchart>
+    <version.gson>2.8.2</version.gson>
+    <version.jandex>2.0.3.Final</version.jandex>
+    <version.trimou>2.4.0.Final</version.trimou>
+    <Version.slf4j>1.7.22</Version.slf4j>
+  </properties>
+
+  <dependencies>
+
+    <dependency>
+      <groupId>org.openjdk.jmh</groupId>
+      <artifactId>jmh-core</artifactId>
+      <version>${version.jmh}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.openjdk.jmh</groupId>
+      <artifactId>jmh-generator-annprocess</artifactId>
+      <version>${version.jmh}</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.knowm.xchart</groupId>
+      <artifactId>xchart</artifactId>
+      <version>${version.xchart}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>${version.gson}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jboss</groupId>
+      <artifactId>jandex</artifactId>
+      <version>${version.jandex}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.trimou</groupId>
+      <artifactId>trimou-extension-gson</artifactId>
+      <version>${version.trimou}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <version>${Version.slf4j}</version>
+    </dependency>
+
+  </dependencies>
+
+  <profiles>
+
+    <profile>
+      <id>weld2</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <dependencies>
+        <dependency>
+          <groupId>org.jboss.weld.se</groupId>
+          <artifactId>weld-se</artifactId>
+          <version>${version.weld}</version>
+        </dependency>
+      </dependencies>
+    </profile>
+
+    <profile>
+      <id>weld3</id>
+      <dependencies>
+        <dependency>
+          <groupId>org.jboss.weld.se</groupId>
+          <artifactId>weld-se-shaded</artifactId>
+          <version>${version.weld}</version>
+        </dependency>
+      </dependencies>
+    </profile>
+
+  </profiles>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.1</version>
+        <configuration>
+          <compilerVersion>${javac.target}</compilerVersion>
+          <source>${maven.compiler.target}</source>
+          <target>${maven.compiler.target}</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>2.2</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <finalName>${shaded.jar.name}</finalName>
+              <transformers>
+                <transformer
+                  implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                  <mainClass>org.openjdk.jmh.Main</mainClass>
+                </transformer>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
+              </transformers>
+              <filters>
+                <filter>
+                  <!-- Shading signed JARs will fail without this. http://stackoverflow.com/questions/999489/invalid-signature-file-when-attempting-to-run-a-jar -->
+                  <artifact>*:*</artifact>
+                  <excludes>
+                    <exclude>META-INF/*.SF</exclude>
+                    <exclude>META-INF/*.DSA</exclude>
+                    <exclude>META-INF/*.RSA</exclude>
+                  </excludes>
+                </filter>
+              </filters>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>1.7</version>
+        <dependencies>
+          <dependency>
+            <groupId>org.jboss</groupId>
+            <artifactId>jandex</artifactId>
+            <version>${version.jandex}</version>
+          </dependency>
+        </dependencies>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <configuration>
+              <target>
+                <taskdef name="jandex" classname="org.jboss.jandex.JandexAntTask" />
+                <jandex run="true" modify="true">
+                  <fileset dir="${project.build.directory}">
+                    <include name="*-shaded.jar" />
+                  </fileset>
+                </jandex>
+                <echo message="Generated Jandex index to speedup Weld bootstrap" />
+              </target>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>2.5</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>2.8.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>2.5.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>2.4</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <version>2.9.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>2.6</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>3.3</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-source-plugin</artifactId>
+          <version>2.2.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.17</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
+</project>

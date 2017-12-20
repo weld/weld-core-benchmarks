@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Weld: Microbenchmarks</title>
+<style>
+body {
+  margin: 25px;
+  font-family: sans-serif;
+  font-size: 14px;
+  color: #333;
+}
+h1, h2, h3, h4 {
+  font-family: sans-serif;
+}
+h1 {
+  font-size: 30px;
+}
+h2 {
+  font-size: 24px;
+}
+p {
+  padding: 5px;
+}
+code, p code, p tt, p tt, td.content tt {
+  background-color: #EFEFEF;
+  border: 1px solid #E2E2E2;
+  border-radius: 3px 3px 3px 3px;
+  padding: 2px 3px;
+  white-space: nowrap;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+th {
+  text-align: left;
+  vertical-align: top;
+}
+table tr td, table tr th {
+  border: 1px solid #ddd;
+  line-height: 1em;
+  padding: 8px;
+}
+td.num-cell {
+  text-align: right;
+}
+td.high-score {
+  background-color: green;
+  color: white;
+}
+</style>
+</head>
+<body>
+  <h1>Weld: Microbenchmarks</h1>
+  Generated at {{timestamp}}.
+  <h2>Summary</h2>
+  <table>
+    <tr>
+        <th>Benchmark</th>
+        {{#each versions}}
+        <th colspan="2">{{this}}</th>
+        {{/each}}
+    </tr>
+    {{#each benchmarks as="benchmark"}}
+    <tr>
+        <td>{{benchmark}}</div></td>
+        {{#each versions as="version"}}
+            {{! Build the key dynamically, e.g. versionToBenchmarkToScore["2.4.6.Final"]["org.jboss.weld.benchmark.core.baseline.BaselineBenchmark"] }}
+            {{#eval "versionToBenchmarkToScore" version benchmark}}
+                <td class="num-cell {{is color 'high-score'}}">
+                   {{value}}
+                </td>
+                <td class="num-cell">
+                    ± {{error}}
+                </td>
+            {{/eval}}
+            <!-- TODO add empty cell if not available -->
+        {{/each}}
+    </tr>
+    {{/each}}
+  </table>
+  <h2>Charts</h2>
+  {{#each charts}}
+    <div>
+        <img alt="Chart {{index}}" src="{{this}}">
+    </div>
+  {{/each}}
+</body>
+</html>
