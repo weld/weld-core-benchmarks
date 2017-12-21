@@ -53,6 +53,8 @@ public abstract class BaseBenchmark<T extends BeanUnderTest> {
     @State(Scope.Benchmark)
     public static class ContainerState {
 
+        private Weld weld;
+
         private WeldContainer container;
 
         @Setup
@@ -62,7 +64,8 @@ public abstract class BaseBenchmark<T extends BeanUnderTest> {
 
         @TearDown
         public void tearDown() {
-            container.shutdown();
+            // Use Weld.shutdown() so that we're able to test Weld 2.2
+            weld.shutdown();
         }
 
         public WeldContainer getContainer() {
@@ -71,11 +74,12 @@ public abstract class BaseBenchmark<T extends BeanUnderTest> {
 
     }
 
-    @SuppressWarnings("serial")
+    @SuppressWarnings({ "serial", "deprecation" })
     @Setup
     public void setup(ContainerState containerState) {
-        instance = containerState.container.select(getBeanClass()).get();
-        requestContext = containerState.getContainer().select(RequestContext.class, new AnnotationLiteral<Unbound>() {
+        // Use deprecated WeldContainer.instance() so that we're able to test Weld 2.2
+        instance = containerState.container.instance().select(getBeanClass()).get();
+        requestContext = containerState.getContainer().instance().select(RequestContext.class, new AnnotationLiteral<Unbound>() {
         }).get();
         requestContext.activate();
     }
