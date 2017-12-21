@@ -162,31 +162,32 @@ public class ReportGenerator {
             try (FileOutputStream out = new FileOutputStream(chartFile)) {
                 BitmapEncoder.saveBitmap(chart, out, BitmapFormat.PNG);
             }
-            charts.add(chartFile.getAbsolutePath());
+            charts.add(chartFile.getName());
         }
 
         MustacheEngine engine = MustacheEngineBuilder.newBuilder().setKeySplitter(new BracketDotKeySplitter())
                 .setProperty(EngineConfigurationKey.PRECOMPILE_ALL_TEMPLATES, false)
                 .addTemplateLocator(ClassPathTemplateLocator.builder(1).setRootPath("templates").build())
-                .registerHelper(HelpersBuilder.EVAL, new EvalHelper(new BracketDotNotation())).build();
+                .registerHelper(HelpersBuilder.EVAL, new EvalHelper(new BracketDotNotation()))
+                .registerHelpers(HelpersBuilder.empty().addInvoke().build()).build();
         Mustache reportTemplate = engine.getMustache("report.html");
         if (reportTemplate == null) {
             throw new IllegalStateException("Report template not found!");
         }
 
         // Prepare report data
-        // Highligh highest values
         for (String benchmarkName : allBenchmarks) {
             List<Score> scores = versionToBenchmarkToScore.values().stream().filter(m -> m.containsKey(benchmarkName)).map(m -> m.get(benchmarkName))
                     .collect(Collectors.toList());
-            Score highest = null;
+            scores.sort((s1, s2) -> s1.value.compareTo(s2.value));
+            // Highest score has 40% luminosity and lowest 95%
+            int lower = 40;
+            int upper = 95;
+            int step = (upper - lower) / (scores.size() - 1);
+            int luminosity = lower;
             for (Score score : scores) {
-                if (highest == null || highest.value.compareTo(score.value) < 0) {
-                    highest = score;
-                }
-            }
-            if (highest != null) {
-                highest.color = "green";
+                score.color = String.format("hsl(140, 100%%, %s%%)", luminosity);
+                luminosity += step;
             }
         }
         List<String> versions = new ArrayList<>(versionToBenchmarkToScore.keySet());

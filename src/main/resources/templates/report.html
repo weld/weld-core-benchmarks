@@ -45,10 +45,6 @@ table tr td, table tr th {
 td.num-cell {
   text-align: right;
 }
-td.high-score {
-  background-color: green;
-  color: white;
-}
 </style>
 </head>
 <body>
@@ -66,16 +62,21 @@ td.high-score {
     <tr>
         <td>{{benchmark}}</div></td>
         {{#each versions as="version"}}
-            {{! Build the key dynamically, e.g. versionToBenchmarkToScore["2.4.6.Final"]["org.jboss.weld.benchmark.core.baseline.BaselineBenchmark"] }}
-            {{#eval "versionToBenchmarkToScore" version benchmark}}
-                <td class="num-cell {{is color 'high-score'}}">
-                   {{value}}
-                </td>
-                <td class="num-cell">
-                    ± {{error}}
-                </td>
+            {{! Push benchmarkToScore map on the stack, e.g. versionToBenchmarkToScore["2.4.6.Final"] }}
+            {{#eval "versionToBenchmarkToScore" version}}
+                {{#invoke benchmark m="containsKey"}}
+                    {{! If the map contains benchmark then push the score on the stack }}
+                    {{#if this}}
+                        {{#eval "versionToBenchmarkToScore" version benchmark}}
+                        <td class="num-cell" style="background-color:{{color}};">{{value}}</td>
+                        <td class="num-cell" style="background-color:{{color}};">± {{error}}</td>
+                        {{/eval}}
+                    {{/if}}
+                    {{#unless this}}
+                    <td></td><td></td>
+                    {{/unless}}
+                {{/invoke}}
             {{/eval}}
-            <!-- TODO add empty cell if not available -->
         {{/each}}
     </tr>
     {{/each}}
