@@ -179,7 +179,7 @@ public class ReportGenerator {
         for (String benchmarkName : allBenchmarks) {
             List<Score> scores = versionToBenchmarkToScore.values().stream().filter(m -> m.containsKey(benchmarkName)).map(m -> m.get(benchmarkName))
                     .collect(Collectors.toList());
-            scores.sort((s1, s2) -> s1.value.compareTo(s2.value));
+            scores.sort((s1, s2) -> s2.value.compareTo(s1.value));
             // Highest score has 40% luminosity and lowest 95%
             int lower = 40;
             int upper = 95;

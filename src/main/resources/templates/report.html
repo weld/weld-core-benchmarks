@@ -62,7 +62,8 @@ td.num-cell {
     <tr>
         <td>{{benchmark}}</div></td>
         {{#each versions as="version"}}
-            {{! Push benchmarkToScore map on the stack, e.g. versionToBenchmarkToScore["2.4.6.Final"] }}
+            {{! versionToBenchmarkToScore type is Map<Version, Map<Benchmark, Score>> }}
+            {{! First push benchmarkToScore map on the stack }}
             {{#eval "versionToBenchmarkToScore" version}}
                 {{#invoke benchmark m="containsKey"}}
                     {{! If the map contains benchmark then push the score on the stack }}
