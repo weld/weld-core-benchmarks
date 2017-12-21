@@ -59,7 +59,8 @@ public abstract class BaseBenchmark<T extends BeanUnderTest> {
 
         @Setup
         public void setup() {
-            container = new Weld().initialize();
+            weld = new Weld();
+            container = weld.initialize();
         }
 
         @TearDown
