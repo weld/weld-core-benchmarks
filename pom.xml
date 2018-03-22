@@ -14,13 +14,14 @@
     <maven.compiler.target>1.8</maven.compiler.target>
     <shaded.jar.name>weld-core-benchmarks</shaded.jar.name>
     <!-- Versions -->
-    <version.jmh>1.19</version.jmh>
+    <version.jmh>1.20</version.jmh>
     <version.weld>2.4.6.Final</version.weld>
     <version.xchart>3.5.0</version.xchart>
     <version.gson>2.8.2</version.gson>
     <version.jandex>2.0.3.Final</version.jandex>
     <version.trimou>2.4.0.Final</version.trimou>
-    <Version.slf4j>1.7.22</Version.slf4j>
+    <version.slf4j>1.7.22</version.slf4j>
+    <version.junit>4.12</version.junit>
   </properties>
 
   <dependencies>
@@ -65,7 +66,14 @@
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-simple</artifactId>
-      <version>${Version.slf4j}</version>
+      <version>${version.slf4j}</version>
+    </dependency>
+
+    <dependency>
+       <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${version.junit}</version>
+      <scope>test</scope>
     </dependency>
 
   </dependencies>

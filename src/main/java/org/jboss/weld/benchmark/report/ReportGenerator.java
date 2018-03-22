@@ -123,7 +123,7 @@ public class ReportGenerator {
 
         for (Entry<String, List<String>> entry : packageToBenchmarkNames.entrySet()) {
             // Generate chart for each package
-            CategoryChart chart = new CategoryChartBuilder().width(1280).height(1024).title(entry.getKey()).xAxisTitle("Benchmarks").yAxisTitle("Ops/s")
+            CategoryChart chart = new CategoryChartBuilder().width(1280).height(1024).title(entry.getKey()).xAxisTitle("Benchmarks").yAxisTitle("Results")
                     .build();
             chart.getStyler().setXAxisTicksVisible(true);
             chart.getStyler().setXAxisLabelRotation(45);

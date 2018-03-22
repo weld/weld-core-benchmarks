@@ -36,7 +36,7 @@ do
     $MVN_CMD package -Dversion.weld=$i -Pweld3
   else
     $MVN_CMD package -Dversion.weld=$i
-  fi 
+  fi
   java -jar target/weld-core-benchmarks.jar -rf json -rff target/results-$i.json $BENCHMARKS
   RESULT_FILES="$RESULT_FILES target/results-$i.json"
 done;
