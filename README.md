@@ -28,3 +28,10 @@ To specify a custom command use `-m`:
 ```
 $ ./run-benchmarks.sh -m "/opt/maven/bin/mvn"
 ```
+
+By default, no extra JVM options are set.
+To specify JVM options use `-j`:
+
+```
+$ ./run-benchmarks.sh -j "-Dorg.jboss.weld.xml.disableValidating=true"
+```

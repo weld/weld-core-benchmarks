@@ -4,8 +4,9 @@ VERSIONS="2.2.16.SP1 2.3.5.Final 2.4.6.Final 3.0.2.Final";
 BENCHMARKS="";
 OUTPUT_PATH="$PWD/target/report"
 MVN_CMD="mvn"
+JAVA_OPTS=""
 
-while getopts ":v:b:o:m:" opt; do
+while getopts ":v:b:o:m:j:" opt; do
   case $opt in
     v) VERSIONS="$OPTARG"
     ;;
@@ -14,6 +15,8 @@ while getopts ":v:b:o:m:" opt; do
     o) OUTPUT_PATH="$OPTARG"
     ;;
     m) MVN_CMD="$OPTARG"
+    ;;
+    j) JAVA_OPTS="$OPTARG"
     ;;
     \?) echo "Invalid option -$OPTARG" >&2
     ;;
@@ -24,6 +27,7 @@ if [ -n  "$BENCHMARKS" ]; then
     echo "Specific benchmarks to run: $BENCHMARKS"
 fi
 echo "I'm about to run benchmarks for versions: $VERSIONS";
+echo "Using JVM options: $JAVA_OPTS"
 echo "Using maven command: $MVN_CMD"
 $MVN_CMD --version
 
@@ -37,7 +41,7 @@ do
   else
     $MVN_CMD package -Dversion.weld=$i
   fi
-  java -jar target/weld-core-benchmarks.jar -rf json -rff target/results-$i.json $BENCHMARKS
+  java $JAVA_OPTS -jar target/weld-core-benchmarks.jar -rf json -rff target/results-$i.json $BENCHMARKS
   RESULT_FILES="$RESULT_FILES target/results-$i.json"
 done;
 

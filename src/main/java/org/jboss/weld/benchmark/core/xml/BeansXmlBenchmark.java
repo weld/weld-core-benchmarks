@@ -25,6 +25,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.jboss.weld.bootstrap.WeldBootstrap;
 import org.jboss.weld.bootstrap.spi.BeansXml;
+import org.jboss.weld.config.SystemPropertiesConfiguration;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Fork;
@@ -63,6 +64,9 @@ public abstract class BeansXmlBenchmark {
     public void setup() {
         bootstrap = new WeldBootstrap();
         beansXml = BeansXmlBenchmark.class.getResource(getBeansXmlName());
+        if (SystemPropertiesConfiguration.INSTANCE.isXmlValidationDisabled()) {
+            System.out.println("INFO: XML validation disabled!");
+        }
     }
 
 }
