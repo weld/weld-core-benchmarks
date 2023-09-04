@@ -15,7 +15,7 @@ public class SimpleAnnotatedBeansXmlBenchmarkTest {
         benchmark.setup();
         BeansXml beansXml = benchmark.run();
         assertEquals(BeanDiscoveryMode.ANNOTATED, beansXml.getBeanDiscoveryMode());
-        assertEquals("1.1", beansXml.getVersion());
+        assertEquals("4.0", beansXml.getVersion());
         assertEquals(0, beansXml.getEnabledInterceptors().size());
 
     }

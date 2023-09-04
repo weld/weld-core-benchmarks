@@ -23,7 +23,7 @@ public class ComplexBeansXmlBenchmark extends BeansXmlBenchmark {
 
     @Override
     protected String getBeansXmlName() {
-        return "/descriptors/beans-20-complex.xml";
+        return "/descriptors/beans-complex.xml";
     }
 
 }

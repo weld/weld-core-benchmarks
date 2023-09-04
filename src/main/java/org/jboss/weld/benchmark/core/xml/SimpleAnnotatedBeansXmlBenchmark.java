@@ -23,7 +23,7 @@ public class SimpleAnnotatedBeansXmlBenchmark extends BeansXmlBenchmark {
 
     @Override
     protected String getBeansXmlName() {
-        return "/descriptors/beans-11-annotated.xml";
+        return "/descriptors/beans-annotated.xml";
     }
 
 }

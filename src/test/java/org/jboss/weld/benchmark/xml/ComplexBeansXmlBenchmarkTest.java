@@ -15,7 +15,7 @@ public class ComplexBeansXmlBenchmarkTest {
         benchmark.setup();
         BeansXml beansXml = benchmark.run();
         assertEquals(BeanDiscoveryMode.ALL, beansXml.getBeanDiscoveryMode());
-        assertEquals("2.0", beansXml.getVersion());
+        assertEquals("4.0", beansXml.getVersion());
         assertEquals(1, beansXml.getEnabledInterceptors().size());
         assertEquals(1, beansXml.getEnabledDecorators().size());
         assertEquals(1, beansXml.getEnabledAlternativeClasses().size());
