@@ -16,9 +16,9 @@
  */
 package org.jboss.weld.benchmark.core.construction;
 
-import javax.enterprise.context.Dependent;
-import javax.enterprise.inject.Instance;
-import javax.inject.Inject;
+import jakarta.enterprise.context.Dependent;
+import jakarta.enterprise.inject.Instance;
+import jakarta.inject.Inject;
 
 import org.jboss.weld.benchmark.core.BaseBenchmark;
 import org.jboss.weld.benchmark.core.BeanUnderTest;

@@ -18,7 +18,7 @@ package org.jboss.weld.benchmark.core.producer;
 
 import java.io.Serializable;
 
-import javax.enterprise.context.Dependent;
+import jakarta.enterprise.context.Dependent;
 
 /**
  * @author Kirill Gaevskii

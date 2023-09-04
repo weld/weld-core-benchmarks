@@ -16,7 +16,7 @@
  */
 package org.jboss.weld.benchmark.core;
 
-import javax.enterprise.context.Dependent;
+import jakarta.enterprise.context.Dependent;
 
 @Dependent
 public class SimpleDependentBean {

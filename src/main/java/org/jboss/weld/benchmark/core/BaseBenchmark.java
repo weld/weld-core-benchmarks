@@ -20,7 +20,7 @@ import static org.jboss.weld.benchmark.core.Configuration.BATCH_SIZE_NORMAL;
 import static org.jboss.weld.benchmark.core.Configuration.FORKS;
 import static org.openjdk.jmh.annotations.Threads.MAX;
 
-import javax.enterprise.util.AnnotationLiteral;
+import jakarta.enterprise.util.AnnotationLiteral;
 
 import org.jboss.weld.context.RequestContext;
 import org.jboss.weld.context.unbound.Unbound;
@@ -65,7 +65,6 @@ public abstract class BaseBenchmark<T extends BeanUnderTest> {
 
         @TearDown
         public void tearDown() {
-            // Use Weld.shutdown() so that we're able to test Weld 2.2
             weld.shutdown();
         }
 
@@ -75,11 +74,9 @@ public abstract class BaseBenchmark<T extends BeanUnderTest> {
 
     }
 
-    @SuppressWarnings({ "serial", "deprecation" })
     @Setup
     public void setup(ContainerState containerState) {
-        // Use deprecated WeldContainer.instance() so that we're able to test Weld 2.2
-        instance = containerState.container.instance().select(getBeanClass()).get();
+        instance = containerState.container.select(getBeanClass()).get();
         requestContext = containerState.getContainer().instance().select(RequestContext.class, new AnnotationLiteral<Unbound>() {
         }).get();
         requestContext.activate();

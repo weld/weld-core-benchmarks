@@ -1,7 +1,7 @@
 package org.jboss.weld.benchmark.core.complex;
 
-import javax.enterprise.context.Dependent;
-import javax.inject.Inject;
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Inject;
 
 import org.jboss.weld.benchmark.core.SimpleDependentBean;
 

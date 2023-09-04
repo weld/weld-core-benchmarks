@@ -1,11 +1,11 @@
 Weld Core MicroBenchmarks
 =========================
 
-By default, benchmarks are run for 2.2.16.SP1 2.3.5.Final 2.4.6.Final and 3.0.2.Final.
+By default, benchmarks are run for 5.1.1.SP2.
 use `-v` to run the benchmarks for a specific set of Weld versions:
 
 ```
-$ ./run-benchmarks.sh -v "2.4.6.Final 3.0.2.Final"
+$ ./run-benchmarks.sh -v "5.1.1.Final 5.1.1.SP2"
 ```
 
 By default, all benchmarks are run.

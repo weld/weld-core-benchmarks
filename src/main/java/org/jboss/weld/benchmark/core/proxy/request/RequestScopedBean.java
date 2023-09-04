@@ -16,7 +16,7 @@
  */
 package org.jboss.weld.benchmark.core.proxy.request;
 
-import javax.enterprise.context.RequestScoped;
+import jakarta.enterprise.context.RequestScoped;
 
 import org.jboss.weld.benchmark.core.BeanUnderTest;
 

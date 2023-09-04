@@ -1,8 +1,8 @@
 package org.jboss.weld.benchmark.core.complex;
 
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.event.Event;
-import javax.inject.Inject;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.event.Event;
+import jakarta.inject.Inject;
 
 import org.jboss.weld.benchmark.core.BeanUnderTest;
 import org.jboss.weld.benchmark.core.DummyEvent;

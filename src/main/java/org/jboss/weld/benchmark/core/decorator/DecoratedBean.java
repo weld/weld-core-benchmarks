@@ -16,7 +16,7 @@
  */
 package org.jboss.weld.benchmark.core.decorator;
 
-import javax.enterprise.context.Dependent;
+import jakarta.enterprise.context.Dependent;
 
 import org.jboss.weld.benchmark.core.DummyDecoratedInterface;
 

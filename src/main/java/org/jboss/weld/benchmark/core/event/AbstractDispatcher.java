@@ -16,7 +16,7 @@
  */
 package org.jboss.weld.benchmark.core.event;
 
-import javax.enterprise.event.Event;
+import jakarta.enterprise.event.Event;
 
 import org.jboss.weld.benchmark.core.BeanUnderTest;
 import org.jboss.weld.benchmark.core.DummyEvent;

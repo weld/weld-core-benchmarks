@@ -1,6 +1,6 @@
 package org.jboss.weld.benchmark.core.complex;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import org.jboss.weld.benchmark.core.Dummy;
 import org.jboss.weld.benchmark.core.DummyDecoratedInterface;

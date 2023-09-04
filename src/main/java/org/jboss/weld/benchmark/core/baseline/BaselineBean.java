@@ -16,7 +16,7 @@
  */
 package org.jboss.weld.benchmark.core.baseline;
 
-import javax.enterprise.context.Dependent;
+import jakarta.enterprise.context.Dependent;
 
 import org.jboss.weld.benchmark.core.BeanUnderTest;
 

@@ -16,8 +16,8 @@
  */
 package org.jboss.weld.benchmark.core.producer;
 
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.inject.Produces;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.inject.Produces;
 
 import org.jboss.weld.benchmark.core.DummyQualifier;
 

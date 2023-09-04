@@ -19,13 +19,13 @@ package org.jboss.weld.benchmark.core.event;
 import static org.jboss.weld.benchmark.core.Configuration.BATCH_SIZE_SLOW;
 import static org.jboss.weld.benchmark.core.Configuration.ITERATIONS;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.Dependent;
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.event.Event;
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.spi.EventMetadata;
-import javax.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.Dependent;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.event.Event;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.spi.EventMetadata;
+import jakarta.inject.Inject;
 
 import org.jboss.weld.benchmark.core.BaseBenchmark;
 import org.jboss.weld.benchmark.core.DummyEvent;

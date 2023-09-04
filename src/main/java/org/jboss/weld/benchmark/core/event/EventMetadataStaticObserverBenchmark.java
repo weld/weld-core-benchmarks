@@ -16,11 +16,11 @@
  */
 package org.jboss.weld.benchmark.core.event;
 
-import javax.enterprise.context.Dependent;
-import javax.enterprise.event.Event;
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.spi.EventMetadata;
-import javax.inject.Inject;
+import jakarta.enterprise.context.Dependent;
+import jakarta.enterprise.event.Event;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.spi.EventMetadata;
+import jakarta.inject.Inject;
 
 import org.jboss.weld.benchmark.core.BaseBenchmark;
 import org.jboss.weld.benchmark.core.DummyEvent;

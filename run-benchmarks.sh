@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSIONS="2.2.16.SP1 2.3.5.Final 2.4.6.Final 3.0.2.Final";
+VERSIONS="5.1.0.Final 5.1.1.SP2";
 BENCHMARKS="";
 OUTPUT_PATH="$PWD/target/report"
 MVN_CMD="mvn"
@@ -34,10 +34,10 @@ $MVN_CMD --version
 RESULT_FILES="";
 for i in $(echo $VERSIONS)
 do
-  if [[ "${i}" == "3"* ]];
+  if [[ "${i}" == "5"* ]];
   then
-    # Activate Weld 3 profile
-    $MVN_CMD package -Dversion.weld=$i -Pweld3
+    # Activate Weld 5 profile
+    $MVN_CMD package -Dversion.weld=$i -Pweld5
   else
     $MVN_CMD package -Dversion.weld=$i
   fi

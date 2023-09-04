@@ -16,13 +16,13 @@
  */
 package org.jboss.weld.benchmark.core;
 
-import javax.annotation.Priority;
-import javax.interceptor.AroundInvoke;
-import javax.interceptor.Interceptor;
-import javax.interceptor.InvocationContext;
+import jakarta.annotation.Priority;
+import jakarta.interceptor.AroundInvoke;
+import jakarta.interceptor.Interceptor;
+import jakarta.interceptor.InvocationContext;
 
 @Interceptor
-@Priority(javax.interceptor.Interceptor.Priority.APPLICATION)
+@Priority(jakarta.interceptor.Interceptor.Priority.APPLICATION)
 @Dummy
 public class DummyInterceptor {
 

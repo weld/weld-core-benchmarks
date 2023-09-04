@@ -16,9 +16,9 @@
  */
 package org.jboss.weld.benchmark.core.producer.disposer;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Disposes;
-import javax.enterprise.inject.Produces;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Disposes;
+import jakarta.enterprise.inject.Produces;
 
 import org.jboss.weld.benchmark.core.DummyQualifier;
 

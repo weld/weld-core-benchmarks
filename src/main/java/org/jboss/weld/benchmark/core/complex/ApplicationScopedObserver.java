@@ -1,7 +1,7 @@
 package org.jboss.weld.benchmark.core.complex;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.event.Observes;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.event.Observes;
 
 import org.jboss.weld.benchmark.core.DummyEvent;
 import org.jboss.weld.benchmark.core.DummyQualifier;

@@ -18,7 +18,7 @@ package org.jboss.weld.benchmark.core.event.beanManager;
 
 import java.lang.annotation.Annotation;
 
-import javax.enterprise.inject.spi.BeanManager;
+import jakarta.enterprise.inject.spi.BeanManager;
 
 import org.jboss.weld.benchmark.core.BeanUnderTest;
 import org.jboss.weld.benchmark.core.DummyEvent;
@@ -35,7 +35,7 @@ public abstract class AbstractDispatcher implements BeanUnderTest {
     }
 
     public boolean getResult() {
-        manager.fireEvent(EVENT, qualifier);
+        manager.getEvent().select(qualifier).fire(EVENT);
         return true;
     }
 }
