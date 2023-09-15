@@ -15,7 +15,7 @@ public class InvokableMethodManualLookupBeanInvocation extends InvokableMethodBe
             bean = lookup.select(InvokableBean.class).get();
             string = lookup.select(String.class).get();
             bool = lookup.select(Boolean.class).get();
-            return invoker.invoke(bean, new Object[]{string, bool});
+            return invoker.invoke(bean, new Object[] { string, bool });
         } finally {
             lookup.destroy(bean);
             lookup.destroy(string);

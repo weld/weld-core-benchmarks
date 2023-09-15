@@ -2,6 +2,7 @@ package org.jboss.weld.benchmark.core.invokableMethods;
 
 import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.invoke.Invokable;
+
 import org.openjdk.jmh.infra.Blackhole;
 
 @Dependent

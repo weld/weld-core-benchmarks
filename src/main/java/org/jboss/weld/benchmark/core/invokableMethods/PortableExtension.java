@@ -1,12 +1,12 @@
 package org.jboss.weld.benchmark.core.invokableMethods;
 
+import java.util.Collection;
+
 import jakarta.enterprise.event.Observes;
 import jakarta.enterprise.inject.spi.AnnotatedMethod;
 import jakarta.enterprise.inject.spi.Extension;
 import jakarta.enterprise.inject.spi.ProcessManagedBean;
 import jakarta.enterprise.invoke.Invoker;
-
-import java.util.Collection;
 
 public class PortableExtension implements Extension {
 
@@ -19,7 +19,8 @@ public class PortableExtension implements Extension {
             throw new IllegalStateException("InvokableBean should have only one method annotated @Invokable");
         }
         invoker = pmb.createInvoker(invokableMethods.iterator().next()).build();
-        lookupAllInvoker = pmb.createInvoker(invokableMethods.iterator().next()).setInstanceLookup().setArgumentLookup(0).setArgumentLookup(1).build();
+        lookupAllInvoker = pmb.createInvoker(invokableMethods.iterator().next()).setInstanceLookup().setArgumentLookup(0)
+                .setArgumentLookup(1).build();
     }
 
     public Invoker<InvokableBean, ?> getInvoker() {

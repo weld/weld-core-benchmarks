@@ -5,6 +5,7 @@ import static org.jboss.weld.benchmark.core.Configuration.FORKS;
 
 import jakarta.enterprise.invoke.Invoker;
 import jakarta.enterprise.util.AnnotationLiteral;
+
 import org.jboss.weld.benchmark.core.Configuration;
 import org.jboss.weld.context.RequestContext;
 import org.jboss.weld.context.unbound.Unbound;
@@ -36,7 +37,7 @@ public abstract class InvokableMethodBenchmarkBase {
     protected Invoker<InvokableBean, String> lookupAllInvoker;
 
     protected String dummyStringArg = "foo";
-    protected Object[] dummyMethodArgs = new Object[]{dummyStringArg, Boolean.TRUE};
+    protected Object[] dummyMethodArgs = new Object[] { dummyStringArg, Boolean.TRUE };
 
     @State(Scope.Benchmark)
     public static class ContainerState {
