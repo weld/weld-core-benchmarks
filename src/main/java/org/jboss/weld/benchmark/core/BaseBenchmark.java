@@ -77,8 +77,9 @@ public abstract class BaseBenchmark<T extends BeanUnderTest> {
     @Setup
     public void setup(ContainerState containerState) {
         instance = containerState.container.select(getBeanClass()).get();
-        requestContext = containerState.getContainer().instance().select(RequestContext.class, new AnnotationLiteral<Unbound>() {
-        }).get();
+        requestContext = containerState.getContainer().instance()
+                .select(RequestContext.class, new AnnotationLiteral<Unbound>() {
+                }).get();
         requestContext.activate();
     }
 

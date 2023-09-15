@@ -7,9 +7,9 @@ import org.jboss.weld.benchmark.core.DummyDecoratedInterface;
 
 @ApplicationScoped
 public class ApplicationScopedBean implements DummyDecoratedInterface {
-    
+
     @Dummy
-    public void ping(){
+    public void ping() {
     }
 
     @Override

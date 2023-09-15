@@ -32,7 +32,8 @@ import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Warmup;
 
 /**
- * This benchmark uses the same Event instance to dispatch two event types. It verifies, that performance does not drop significantly
+ * This benchmark uses the same Event instance to dispatch two event types. It verifies, that performance does not drop
+ * significantly
  * when simple caching cannot be used.
  *
  * @author Jozef Hartinger

@@ -10,7 +10,7 @@ import org.openjdk.jmh.annotations.Warmup;
 // Use smaller batch size for complex benchmark
 @Warmup(batchSize = BATCH_SIZE_SLOW, iterations = ITERATIONS)
 @Measurement(batchSize = BATCH_SIZE_SLOW, iterations = ITERATIONS)
-public class ComplexBenchmark extends BaseBenchmark<RequestScopedBean>{
+public class ComplexBenchmark extends BaseBenchmark<RequestScopedBean> {
 
     @Override
     protected Class<RequestScopedBean> getBeanClass() {

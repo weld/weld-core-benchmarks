@@ -9,6 +9,13 @@
 
   <name>Weld: Microbenchmarks</name>
 
+  <!-- Parent is used only to inherited formatting config -->
+  <parent>
+    <groupId>org.jboss.weld</groupId>
+    <artifactId>weld-parent</artifactId>
+    <version>47</version>
+  </parent>
+
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.target>11</maven.compiler.target>

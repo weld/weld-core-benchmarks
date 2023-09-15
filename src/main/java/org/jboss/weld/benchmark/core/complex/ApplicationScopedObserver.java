@@ -9,7 +9,8 @@ import org.jboss.weld.benchmark.core.DummyQualifier;
 @ApplicationScoped
 public class ApplicationScopedObserver {
 
-    public void observesDependentScopedProduced(@Observes DummyEvent event, @DummyQualifier("test") DependentBean dependentBean) {
+    public void observesDependentScopedProduced(@Observes DummyEvent event,
+            @DummyQualifier("test") DependentBean dependentBean) {
         dependentBean.ping();
     }
 }

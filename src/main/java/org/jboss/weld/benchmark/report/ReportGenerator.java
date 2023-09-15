@@ -115,7 +115,8 @@ public class ReportGenerator {
         }
 
         // Group benchmarks by package
-        Map<String, List<String>> packageToBenchmarkNames = allBenchmarks.stream().collect(Collectors.groupingBy(b -> b.substring(0, b.lastIndexOf('.'))));
+        Map<String, List<String>> packageToBenchmarkNames = allBenchmarks.stream()
+                .collect(Collectors.groupingBy(b -> b.substring(0, b.lastIndexOf('.'))));
 
         // Report data
         List<String> charts = new ArrayList<>();
@@ -123,7 +124,8 @@ public class ReportGenerator {
 
         for (Entry<String, List<String>> entry : packageToBenchmarkNames.entrySet()) {
             // Generate chart for each package
-            CategoryChart chart = new CategoryChartBuilder().width(1280).height(1024).title(entry.getKey()).xAxisTitle("Benchmarks").yAxisTitle("Results")
+            CategoryChart chart = new CategoryChartBuilder().width(1280).height(1024).title(entry.getKey())
+                    .xAxisTitle("Benchmarks").yAxisTitle("Results")
                     .build();
             chart.getStyler().setXAxisTicksVisible(true);
             chart.getStyler().setXAxisLabelRotation(45);
@@ -136,7 +138,8 @@ public class ReportGenerator {
                 List<String> benchmarks = new ArrayList<>();
                 List<BigDecimal> scores = new ArrayList<>();
                 List<BigDecimal> errors = new ArrayList<>();
-                Map<String, Score> benchmarkToScore = versionToBenchmarkToScore.computeIfAbsent(series.getKey(), k -> new HashMap<>());
+                Map<String, Score> benchmarkToScore = versionToBenchmarkToScore.computeIfAbsent(series.getKey(),
+                        k -> new HashMap<>());
                 versionToBenchmarkToScore.put(series.getKey(), benchmarkToScore);
 
                 for (String benchmarkName : benchmarkNames) {
@@ -145,7 +148,8 @@ public class ReportGenerator {
                     if (benchmark != null) {
                         BigDecimal score = benchmark.get("primaryMetric").getAsJsonObject().get("score").getAsBigDecimal();
                         BigDecimal error = benchmark.get("primaryMetric").getAsJsonObject().get("scoreError").getAsBigDecimal();
-                        benchmarkToScore.put(benchmarkName, new Score(score.setScale(3, RoundingMode.HALF_UP), error.setScale(3, RoundingMode.HALF_UP)));
+                        benchmarkToScore.put(benchmarkName,
+                                new Score(score.setScale(3, RoundingMode.HALF_UP), error.setScale(3, RoundingMode.HALF_UP)));
                         scores.add(score);
                         errors.add(error);
                     } else {
@@ -177,7 +181,8 @@ public class ReportGenerator {
 
         // Prepare report data
         for (String benchmarkName : allBenchmarks) {
-            List<Score> scores = versionToBenchmarkToScore.values().stream().filter(m -> m.containsKey(benchmarkName)).map(m -> m.get(benchmarkName))
+            List<Score> scores = versionToBenchmarkToScore.values().stream().filter(m -> m.containsKey(benchmarkName))
+                    .map(m -> m.get(benchmarkName))
                     .collect(Collectors.toList());
             scores.sort((s1, s2) -> s2.value.compareTo(s1.value));
             // Highest score has 40% luminosity and lowest 95%

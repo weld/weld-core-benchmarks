@@ -65,7 +65,8 @@ public class ComplexObserverBenchmark extends BaseBenchmark<Dispatcher> {
     @RequestScoped
     public static class Receiver {
 
-        public static void dummyEventListener(@Observes @DummyQualifier(MARKER) DummyEvent dummyEvent, EventMetadata metadata, SimpleApplicationScopedBean application, SimpleDependentBean dependent) {
+        public static void dummyEventListener(@Observes @DummyQualifier(MARKER) DummyEvent dummyEvent, EventMetadata metadata,
+                SimpleApplicationScopedBean application, SimpleDependentBean dependent) {
             if (!dummyEvent.value() || metadata.getType() == null) {
                 throw new IllegalStateException();
             }
