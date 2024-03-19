@@ -27,7 +27,7 @@ import org.openjdk.jmh.annotations.Warmup;
 @Warmup(batchSize = BATCH_SIZE_NORMAL, iterations = Configuration.ITERATIONS, time = 5)
 @Measurement(batchSize = BATCH_SIZE_NORMAL, iterations = Configuration.ITERATIONS, time = 5)
 @State(Scope.Thread)
-public abstract class InvokableMethodBenchmarkBase {
+public abstract class InvokerBenchmarkBase {
 
     private RequestContext requestContext;
 
@@ -82,10 +82,10 @@ public abstract class InvokableMethodBenchmarkBase {
     }
 
     @Benchmark
-    public String run() {
+    public String run() throws Exception {
         // return result of benchmark to avoid dead code elimination
         return performInvoke();
     }
 
-    protected abstract String performInvoke();
+    protected abstract String performInvoke() throws Exception;
 }
