@@ -3,10 +3,15 @@ package org.jboss.weld.benchmark.core.invokableMethods;
 import jakarta.enterprise.inject.Instance;
 import jakarta.enterprise.inject.spi.CDI;
 
-public class InvokableMethodManualLookupBeanInvocation extends InvokableMethodBenchmarkBase {
+/**
+ * Very similar to {@link InvokerBenchmarkLookup} test.
+ * Invoker is used to invoke bean method but all lookups are made manually.
+ * This simplifies the invocation logic of the invoker itself, therefore it is expected that this test will have better
+ * performance than {@link InvokerBenchmarkLookup} but it shouldn't be dramatic.
+ */
+public class InvokerManualLookupBeanInvocation extends InvokerBenchmarkBase {
     @Override
-    protected String performInvoke() {
-        // WIP - naive assumption is that this should be just about the same performance as InvokableMethodBenchmarkLookup
+    protected String performInvoke() throws Exception {
         Instance<Object> lookup = CDI.current().getBeanContainer().createInstance();
         InvokableBean bean = null;
         String string = null;

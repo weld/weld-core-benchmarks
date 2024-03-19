@@ -1,11 +1,11 @@
 Weld Core MicroBenchmarks
 =========================
 
-By default, benchmarks are run for 5.1.1.SP2.
+By default, benchmarks are run for 6.0.0.Beta2.
 use `-v` to run the benchmarks for a specific set of Weld versions:
 
 ```
-$ ./run-benchmarks.sh -v "5.1.1.Final 5.1.1.SP2"
+$ ./run-benchmarks.sh -v "6.0.0.Beta1 6.0.0.Beta2"
 ```
 
 By default, all benchmarks are run.
@@ -13,6 +13,12 @@ Use `-b` to run a specific benchmark:
 
 ```
 $ ./run-benchmarks.sh -b InterceptorBenchmark
+```
+
+If you need to run multiple specific benchmarks, list them as space separated items:
+
+```
+$ ./run-benchmarks.sh -b "InvokerBenchmarkSimpleBeanInvocation InvokerBenchmarkNoLookup"
 ```
 
 By default, an HTML report and chart images are generated in `target/report` directory.
