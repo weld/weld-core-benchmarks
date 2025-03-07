@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSIONS="5.1.0.Final 5.1.1.SP2";
+VERSIONS="6.0.0.Final 6.0.1.Final";
 BENCHMARKS="";
 OUTPUT_PATH="$PWD/target/report"
 MVN_CMD="mvn"
@@ -34,13 +34,7 @@ $MVN_CMD --version
 RESULT_FILES="";
 for i in $(echo $VERSIONS)
 do
-  if [[ "${i}" == "5"* ]];
-  then
-    # Activate Weld 5 profile
-    $MVN_CMD package -Dversion.weld=$i -Pweld5
-  else
-    $MVN_CMD package -Dversion.weld=$i
-  fi
+  $MVN_CMD package -Dversion.weld=$i
   java $JAVA_OPTS -jar target/weld-core-benchmarks.jar -rf json -rff target/results-$i.json $BENCHMARKS
   RESULT_FILES="$RESULT_FILES target/results-$i.json"
 done;
